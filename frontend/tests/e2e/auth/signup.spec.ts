@@ -57,8 +57,11 @@ test.describe("Signup Page", () => {
     // Logout
     await page.click('[data-testid="logout-button"]');
 
-    // Try to signup again with same email
+    // Wait for logout redirect to complete, then navigate to signup
+    await expect(page).toHaveURL("/login");
     await page.goto("/signup");
+
+    // Try to signup again with same email
     await page.fill('[data-testid="email-input"]', email);
     await page.fill('[data-testid="password-input"]', password);
     await page.click('[data-testid="signup-button"]');

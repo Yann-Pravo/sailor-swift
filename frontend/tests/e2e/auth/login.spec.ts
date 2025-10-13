@@ -84,8 +84,10 @@ test.describe("Login Page", () => {
     await expect(page).toHaveURL("/dashboard");
     await page.click('[data-testid="logout-button"]');
 
+    // Wait for logout redirect to complete
+    await expect(page).toHaveURL("/login");
+
     // Now test loading state
-    await page.goto("/login");
     await page.fill('[data-testid="email-input"]', email);
     await page.fill('[data-testid="password-input"]', password);
 
