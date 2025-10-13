@@ -145,16 +145,9 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('frontend/package-lock.json') }}
 
       - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: |
           cd frontend
-          npx playwright install --with-deps firefox
-
-      - name: Install Playwright system dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: |
-          cd frontend
-          npx playwright install-deps firefox
+          npx playwright install firefox
 
       - name: Start backend server
         env:
