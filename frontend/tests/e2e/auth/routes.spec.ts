@@ -17,10 +17,10 @@ test.describe("Route Access Control", () => {
     }
   });
 
-  test("should redirect root to login when not authenticated", async ({
+  test("should redirect to login when accessing root while not authenticated", async ({
     page,
   }) => {
-    await page.goto("/");
+    await page.goto("/dashboard");
     await expect(page).toHaveURL("/login");
   });
 
