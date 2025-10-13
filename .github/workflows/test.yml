@@ -91,6 +91,8 @@ jobs:
   e2e-tests:
     name: E2E Tests
     runs-on: ubuntu-latest
+    # Only run E2E tests on pull requests and main branch to save CI time
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
 
     services:
       postgres:
@@ -148,15 +150,28 @@ jobs:
         run: |
           cd backend
           uvicorn app.main:app --host 0.0.0.0 --port 8000 &
-          sleep 5
+          echo "Waiting for backend to be ready..."
+          timeout 30 bash -c 'until curl -s http://localhost:8000/docs > /dev/null; do sleep 1; done'
+          echo "Backend is ready!"
 
       - name: Start frontend server
         env:
           VITE_API_URL: http://localhost:8000
+          VITE_GOOGLE_CLIENT_ID: fake-google-client-id-for-testing
+          VITE_WALLETCONNECT_PROJECT_ID: fake-walletconnect-id
         run: |
           cd frontend
           npm run dev &
-          sleep 5
+          echo "Waiting for frontend to be ready..."
+          timeout 30 bash -c 'until curl -s http://localhost:5173 > /dev/null; do sleep 1; done'
+          echo "Frontend is ready!"
+
+      - name: Debug - Check if page loads
+        run: |
+          echo "Testing frontend homepage..."
+          curl -I http://localhost:5173
+          echo "Testing login page..."
+          curl http://localhost:5173/login | head -50
 
       - name: Run E2E tests
         run: |
