@@ -4,9 +4,9 @@ A modern full-stack authentication application built with React TypeScript, Fast
 
 [![Tests](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/test.yml/badge.svg)](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/test.yml)
 [![Docker Build](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/docker.yml/badge.svg)](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/docker.yml)
-[![Backend Tests](https://img.shields.io/badge/backend%20tests-38%20passed-brightgreen)](./backend/tests)
+[![Backend Tests](https://img.shields.io/badge/backend%20tests-31%2F38%20passed-yellow)](./backend/tests)
 [![Frontend Tests](https://img.shields.io/badge/frontend%20tests-48%20passed-brightgreen)](./frontend/src)
-[![E2E Tests](https://img.shields.io/badge/e2e%20tests-99%2F100%20passed-green)](./frontend/tests/e2e)
+[![E2E Tests](https://img.shields.io/badge/e2e%20tests-20%20passed-brightgreen)](./frontend/tests/e2e)
 [![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen)](./backend/htmlcov)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)](https://www.typescriptlang.org/)
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
@@ -33,10 +33,11 @@ A modern full-stack authentication application built with React TypeScript, Fast
   - Environment-based configuration
   - CORS protection
 - 🧪 **Comprehensive Testing**
-  - Backend unit tests with pytest (38 tests, 92% coverage) ✅
-  - Frontend unit tests with Vitest (48 tests, 100% pass rate) ✅
-  - E2E tests with Playwright (99/100 tests passing) ✅
+  - Backend unit tests with pytest (31/38 passing) ⚠️
+  - Frontend unit tests with Vitest (48/48 passing) ✅
+  - E2E tests with Playwright (20/20 passing, Firefox only) ✅
   - Complete coverage for all authentication methods (email, OAuth, wallet)
+  - Optimized CI/CD with browser caching
 
 ## Architecture
 
@@ -132,12 +133,12 @@ Comprehensive testing suite covering backend, frontend, and end-to-end scenarios
 
 ### Test Coverage Summary
 
-| Test Suite              | Tests       | Status         | Coverage |
-| ----------------------- | ----------- | -------------- | -------- |
-| **Backend Unit Tests**  | 38          | ✅ All Passing | 92%      |
-| **Frontend Unit Tests** | 48          | ✅ All Passing | 100%     |
-| **E2E Tests**           | 99/100      | ✅ 99% Passing | -        |
-| **Total**               | **185/186** | **✅ 99.5%**   | **92%**  |
+| Test Suite              | Tests     | Status            |
+| ----------------------- | --------- | ----------------- |
+| **Backend Unit Tests**  | 31/38     | ⚠️ 82% Passing    |
+| **Frontend Unit Tests** | 48/48     | ✅ All Passing    |
+| **E2E Tests (Firefox)** | 20/20     | ✅ All Passing    |
+| **Total**               | **99/106**| **✅ 93% Passing**|
 
 ### Quick Test Commands
 
@@ -154,24 +155,19 @@ cd frontend && npm test -- WalletConnectButton
 # Run E2E tests (requires running application)
 cd frontend && npm run test:e2e
 
-# Run E2E tests for specific browser
-cd frontend && npx playwright test --project=chromium
-
-# View coverage report
-cd backend && open htmlcov/index.html
+# Run E2E tests in headless mode
+cd frontend && npx playwright test --project=firefox
 ```
 
 ### What's Tested
 
-#### Backend (38 tests)
+#### Backend (31/38 tests passing)
 
 - ✅ User signup and login flows
-- ✅ JWT token generation and validation
 - ✅ Password hashing and verification
-- ✅ Google OAuth authentication
+- ✅ Google OAuth authentication (new user)
 - ✅ Wallet authentication
-- ✅ Token refresh mechanism
-- ✅ User model and database operations
+- ⚠️ Token refresh and /me endpoint (7 tests failing - DB cleanup issues)
 
 #### Frontend (48 tests)
 
@@ -183,13 +179,17 @@ cd backend && open htmlcov/index.html
 - ✅ API service layer
 - ✅ Form validation
 
-#### E2E Tests (99/100 tests)
+#### E2E Tests (20/20 tests passing)
 
-- ✅ Complete authentication flows
-- ✅ Session persistence
-- ✅ Route protection
-- ✅ User dashboard
-- ✅ Multi-browser testing (Chromium, Firefox, WebKit, Mobile)
+- ✅ Complete authentication flows (email/password)
+- ✅ Session persistence and logout
+- ✅ Route protection and redirects
+- ✅ Form validation and error handling
+- ✅ Loading states during authentication
+- ✅ Network error handling
+- ✅ User profile display
+- ✅ Duplicate email prevention
+- ✅ Optimized for Firefox (fast CI execution with browser caching)
 
 For detailed testing instructions and strategies, see [TESTING.md](./TESTING.md).
 
