@@ -166,13 +166,6 @@ jobs:
           timeout 30 bash -c 'until curl -s http://localhost:5173 > /dev/null; do sleep 1; done'
           echo "Frontend is ready!"
 
-      - name: Debug - Check if page loads
-        run: |
-          echo "Testing frontend homepage..."
-          curl -I http://localhost:5173
-          echo "Testing login page..."
-          curl http://localhost:5173/login | head -50
-
       - name: Run E2E tests
         run: |
           cd frontend
