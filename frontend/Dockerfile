@@ -32,7 +32,7 @@ RUN npm ci --only=production
 RUN npm install -g serve
 
 # Create non-root user for security
-RUN addgroup -g 1000 appuser && adduser -D -u 1000 -G appuser appuser
+RUN addgroup -S appuser && adduser -S -G appuser appuser
 RUN chown -R appuser:appuser /app
 USER appuser
 
