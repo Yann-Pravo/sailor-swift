@@ -52,7 +52,18 @@ def db_session():
         yield session
     finally:
         session.close()
-        Base.metadata.drop_all(bind=engine)
+        # Use CASCADE to drop tables with dependencies
+        from sqlalchemy import text
+        session = TestingSessionLocal()
+        try:
+            # Drop all tables with CASCADE to handle foreign key constraints
+            session.execute(text("DROP SCHEMA public CASCADE"))
+            session.execute(text("CREATE SCHEMA public"))
+            session.commit()
+        except Exception:
+            session.rollback()
+        finally:
+            session.close()
 
 
 @pytest.fixture(scope="function")
