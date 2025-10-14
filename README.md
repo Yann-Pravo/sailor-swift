@@ -4,7 +4,7 @@ A modern full-stack authentication application built with React TypeScript, Fast
 
 [![Tests](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/test.yml/badge.svg)](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/test.yml)
 [![Docker Build](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/docker.yml/badge.svg)](https://github.com/Yann-Pravo/sailor-swift/actions/workflows/docker.yml)
-[![Backend Tests](https://img.shields.io/badge/backend%20tests-31%2F38%20passed-yellow)](./backend/tests)
+[![Backend Tests](https://img.shields.io/badge/backend%20tests-38%20passed-brightgreen)](./backend/tests)
 [![Frontend Tests](https://img.shields.io/badge/frontend%20tests-48%20passed-brightgreen)](./frontend/src)
 [![E2E Tests](https://img.shields.io/badge/e2e%20tests-20%20passed-brightgreen)](./frontend/tests/e2e)
 [![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen)](./backend/htmlcov)
@@ -33,7 +33,7 @@ A modern full-stack authentication application built with React TypeScript, Fast
   - Environment-based configuration
   - CORS protection
 - 🧪 **Comprehensive Testing**
-  - Backend unit tests with pytest (31/38 passing) ⚠️
+  - Backend unit tests with pytest (38/38 passing, 91% coverage) ✅
   - Frontend unit tests with Vitest (48/48 passing) ✅
   - E2E tests with Playwright (20/20 passing, Firefox only) ✅
   - Complete coverage for all authentication methods (email, OAuth, wallet)
@@ -133,12 +133,12 @@ Comprehensive testing suite covering backend, frontend, and end-to-end scenarios
 
 ### Test Coverage Summary
 
-| Test Suite              | Tests     | Status            |
-| ----------------------- | --------- | ----------------- |
-| **Backend Unit Tests**  | 31/38     | ⚠️ 82% Passing    |
-| **Frontend Unit Tests** | 48/48     | ✅ All Passing    |
-| **E2E Tests (Firefox)** | 20/20     | ✅ All Passing    |
-| **Total**               | **99/106**| **✅ 93% Passing**|
+| Test Suite              | Tests      | Status            |
+| ----------------------- | ---------- | ----------------- |
+| **Backend Unit Tests**  | 38/38      | ✅ All Passing    |
+| **Frontend Unit Tests** | 48/48      | ✅ All Passing    |
+| **E2E Tests (Firefox)** | 20/20      | ✅ All Passing    |
+| **Total**               | **106/106**| **✅ 100% Pass**  |
 
 ### Quick Test Commands
 
@@ -161,13 +161,15 @@ cd frontend && npx playwright test --project=firefox
 
 ### What's Tested
 
-#### Backend (31/38 tests passing)
+#### Backend (38/38 tests passing)
 
 - ✅ User signup and login flows
 - ✅ Password hashing and verification
-- ✅ Google OAuth authentication (new user)
+- ✅ Google OAuth authentication
 - ✅ Wallet authentication
-- ⚠️ Token refresh and /me endpoint (7 tests failing - DB cleanup issues)
+- ✅ JWT token generation and refresh
+- ✅ /auth/me endpoint with authentication
+- ✅ User model and database operations
 
 #### Frontend (48 tests)
 
