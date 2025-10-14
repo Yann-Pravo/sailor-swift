@@ -38,6 +38,11 @@ A modern full-stack authentication application built with React TypeScript, Fast
   - E2E tests with Playwright (20/20 passing, Firefox only) ✅
   - Complete coverage for all authentication methods (email, OAuth, wallet)
   - Optimized CI/CD with browser caching
+- 🚢 **Production Ready**
+  - Deployed on Railway with managed PostgreSQL
+  - Multi-stage Docker builds for optimization
+  - Environment-based configuration
+  - CORS and security hardening
 
 ## Architecture
 
@@ -121,11 +126,45 @@ docker compose logs -f
 
 ### 4. Access the Application
 
+**Local Development:**
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:8000
 - **API Documentation**: http://localhost:8000/docs
 - **Database**: localhost:5432
 - **Database Admin** (Adminer): http://localhost:8080
+
+**Production (Railway):**
+- **Frontend**: https://sailor-swift-production.up.railway.app
+- **Backend API**: https://sailor-swift-api-production.up.railway.app
+- **API Documentation**: https://sailor-swift-api-production.up.railway.app/docs
+
+## Production Deployment
+
+The application is deployed on Railway with the following architecture:
+
+### Services
+- **PostgreSQL Database** - Managed database with automatic backups
+- **Backend API** - FastAPI service with auto-scaling
+- **Frontend** - Static React app served with optimized caching
+
+### Deployment Features
+- ✅ Automatic deployments on git push
+- ✅ Zero-downtime deployments
+- ✅ Environment variable management
+- ✅ HTTPS/SSL certificates included
+- ✅ Multi-stage Docker builds for optimization
+- ✅ Internal networking for database connections
+
+### Quick Deploy to Railway
+
+1. Fork this repository
+2. Sign up at [railway.app](https://railway.app)
+3. Create a new project from GitHub
+4. Add PostgreSQL database
+5. Configure environment variables (see `.env.example`)
+6. Deploy!
+
+For detailed deployment instructions, see the deployment guide in the repository.
 
 ## Testing
 
